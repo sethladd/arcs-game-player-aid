@@ -1,0 +1,9 @@
+# Licensed commercial fonts — must not be redistributed.
+# Supply your own copies; see README.md "Getting the fonts".
+fonts/
+
+# macOS cruft
+.DS_Store
+
+# scratch dir for files git could not unlink on this mount
+_to_delete/

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Arcs Player Reference</title>
+<style>
+@font-face{font-family:'EBG';src:url('fonts/bolyar900.woff2') format('woff2');font-weight:400;font-style:normal}
+@font-face{font-family:'AS';src:url('fonts/kabelbook.woff2') format('woff2');font-weight:400;font-style:normal}
+
+:root{
+  --paper:#f4edda; --paper2:#efe6cf; --ink:#28211a; --faded:#5c5142;
+  --gold:#b8922e; --goldline:#c8a84b; --dark:#241d15; --darkline:#8a6d2f;
+  --adm:#8b8574; --agg:#bf3a2f; --con:#c05a28; --mob:#2e7f92;
+  --assault:#ae3c34; --skirmish:#2aa3c8; --raid:#e07f2d;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+@page{size:letter;margin:0}
+html,body{background:#888}
+.page{background:
+  radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.5), rgba(255,255,255,0) 60%),
+  radial-gradient(ellipse at 80% 90%, rgba(184,146,46,.10), rgba(184,146,46,0) 55%),
+  var(--paper);
+  color:var(--ink);font-family:'AS',sans-serif;
+  padding:.26in .30in .24in;
+  page-break-after:always;position:relative;overflow:hidden;
+  display:flex;flex-direction:column}
+.pg1{zoom:1.30;width:6.5385in;height:8.4615in}
+.pg2{zoom:1.18;width:7.2034in;height:9.3220in}
+.page:last-child{page-break-after:auto}
+
+/* ---------- header ---------- */
+.hdr{display:flex;align-items:baseline;gap:10px;border-bottom:3px double var(--goldline);
+  padding-bottom:4px;margin-bottom:7px}
+.hdr .title{font-family:'EBG';font-weight:700;font-size:21px;letter-spacing:4px;font-variant:small-caps}
+.hdr .sub{font-family:'EBG';font-weight:600;font-size:10.5px;letter-spacing:1.6px;font-variant:small-caps;color:#7a6327}
+.hdr .right{margin-left:auto;font-size:8px;color:var(--faded);font-style:italic}
+
+/* ---------- section titles ---------- */
+.sect{display:flex;align-items:center;gap:6px;margin:0 0 4px}
+.sect:before,.sect:after{content:'';height:3px;border-top:1px solid var(--goldline);border-bottom:1px solid var(--goldline);flex:1}
+.sect span{font-family:'EBG';font-weight:700;font-size:11px;letter-spacing:1.3px;font-variant:small-caps;white-space:nowrap}
+.sect.left:before{display:none}
+.sect .n{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;
+  background:var(--ink);color:#f4edda;font-family:'AS';font-weight:800;font-size:9.5px;letter-spacing:0}
+
+/* ---------- generic ---------- */
+p,li{font-size:8.6px;line-height:1.28}
+b{font-weight:700}
+i{font-style:italic}
+.small{font-size:7.8px;color:var(--faded)}
+.box{border:1px solid var(--goldline);border-radius:4px;background:rgba(255,255,255,.35);padding:5px 7px}
+.goldbox{border:1.4px solid var(--goldline);border-radius:5px;background:linear-gradient(#f8f2df,#f1e7cc);
+  box-shadow:0 0 0 2.5px rgba(200,168,75,.22);padding:5px 7px}
+.dark{background:linear-gradient(160deg,#2b2318,#1e1810);color:#e9ddbb;border:1px solid var(--darkline);border-radius:5px;padding:6px 8px}
+.dark .small{color:#b8a878}
+.dark b{color:#f5ecd2}
+
+/* ---------- round strip ---------- */
+.round{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}
+.rstep{border:1px solid var(--goldline);border-radius:5px;background:rgba(255,255,255,.4);padding:5px 6px 4px;position:relative}
+.rstep h4{font-family:'AS';font-weight:800;font-size:8.4px;text-transform:uppercase;letter-spacing:.2px;margin-bottom:2px;display:flex;gap:4px;align-items:center}
+.rstep h4 .n{width:13px;height:13px;border-radius:50%;background:var(--ink);color:#f4edda;display:inline-flex;
+  align-items:center;justify-content:center;font-size:8.5px;flex:none}
+.rstep p{font-size:7.9px;line-height:1.24}
+.rstep:not(:last-child):after{content:'';position:absolute;right:-6.5px;top:44%;width:0;height:0;border-left:5px solid var(--gold);border-top:3.4px solid transparent;border-bottom:3.4px solid transparent;z-index:2}
+
+/* ---------- columns ---------- */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:7px;flex:1;min-height:0}
+.col{display:flex;flex-direction:column;gap:6px;min-width:0}
+
+/* ---------- card-play options ---------- */
+.opt{display:grid;grid-template-columns:78px 1fr;gap:7px;border:1px solid var(--goldline);border-radius:5px;
+  background:rgba(255,255,255,.38);padding:4px 6px 4px 4px;align-items:center}
+.opt img{width:78px;border-radius:3px;border:1px solid #d8c89a;display:block}
+.opt h4{font-family:'AS';font-weight:800;font-size:8.8px;text-transform:uppercase;letter-spacing:.25px}
+.opt h4 .tag{font-weight:700;font-size:7.4px;letter-spacing:.3px;color:#fff;border-radius:2.5px;padding:.5px 4px 1px;margin-left:3px;vertical-align:1px}
+.opt p{font-size:8.1px;line-height:1.24;margin-top:1px}
+.pips{white-space:nowrap}
+
+/* pip svg */
+.pip{display:inline-block;width:7px;height:7px;vertical-align:-.5px}
+.pip.lg{width:9px;height:9px}
+
+/* ---------- turn steps ---------- */
+.tstep{display:grid;grid-template-columns:16px 1fr;gap:6px;align-items:start}
+.tstep .n{width:15px;height:15px;border-radius:50%;background:var(--ink);color:#f4edda;display:flex;align-items:center;
+  justify-content:center;font-weight:800;font-size:9.5px;margin-top:1px}
+.tstep h4{font-weight:800;font-size:8.6px;text-transform:uppercase;letter-spacing:.2px}
+.tstep p{font-size:8.2px}
+.tsteps{display:flex;flex-direction:column;gap:5px}
+
+/* ---------- resource rows ---------- */
+.rrow{display:grid;grid-template-columns:20px 1fr;gap:5px;align-items:center;padding:1.5px 0}
+.rrow img{width:19px;height:19px}
+.rrow p{font-size:8.2px;line-height:1.2}
+.rrow b{font-size:8.4px}
+
+/* ---------- suits ---------- */
+.suit{display:flex;align-items:center;gap:5px;font-size:8.6px;padding:1.5px 0}
+.suit .nm{font-family:'AS';font-weight:800;font-size:8px;text-transform:uppercase;letter-spacing:.2px;width:100px}
+.suit .acts{color:var(--ink)}
+.gloss{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px}
+.gloss p{font-size:7.9px;line-height:1.22}
+.gloss b{font-size:8.1px}
+
+/* ---------- dice ---------- */
+.dice3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.die h5{font-family:'AS';font-weight:800;font-size:9px;text-transform:uppercase;letter-spacing:.35px;text-align:center;margin-bottom:3px}
+.die .faces{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5px}
+.die .faces img{width:100%;border-radius:3px;display:block;box-shadow:0 .5px 1.5px rgba(0,0,0,.35)}
+.die p{font-size:7.6px;text-align:center;margin-top:3px;line-height:1.2;color:var(--faded)}
+.die p b{color:var(--ink)}
+
+/* resolve order */
+.res{display:grid;grid-template-columns:17px 1fr;gap:6px;align-items:center;padding:2.4px 0}
+.res+.res{border-top:1px dotted #cbb87f}
+.res img{width:15px;height:15px;justify-self:center}
+.res p{font-size:8.2px;line-height:1.22}
+
+/* ---------- symbols table ---------- */
+.symgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px}
+.sym{display:grid;grid-template-columns:16px 1fr;gap:5px;align-items:center;padding:1px 0}
+.sym img{max-width:15px;max-height:16px;justify-self:center}
+.sym p{font-size:7.8px;line-height:1.15}
+.sym b{font-size:8px}
+
+/* ---------- ambitions ---------- */
+.amb{display:grid;grid-template-columns:15px 20px 74px 1fr;gap:6px;align-items:center;padding:2.6px 0}
+.amb+.amb{border-top:1px solid rgba(200,168,75,.35)}
+.amb .chip{width:14px;height:15px;background:#f2ead2;border-radius:2.5px;color:#241d15;font-weight:800;font-size:10px;
+  display:flex;align-items:center;justify-content:center;font-family:'AS'}
+.amb img.ic{max-width:20px;max-height:17px;justify-self:center;filter:invert(88%) sepia(24%) saturate(500%) hue-rotate(5deg)}
+.amb .nm{font-family:'EBG';font-weight:700;font-size:10.5px;letter-spacing:.9px;font-variant:small-caps;color:#f0e5c5}
+.amb p{font-size:7.9px;line-height:1.16;color:#d9cba1}
+.amb p b{color:#f5ecd2}
+.amb .tok{width:11px;height:11px;vertical-align:-2px;border-radius:50%}
+
+.mrow{display:flex;align-items:center;gap:4px;justify-content:center}
+.mrow img{width:30px}
+.mrow .arr{width:0;height:0;border-top:6px solid #c8a84b;border-left:4px solid transparent;border-right:4px solid transparent;display:inline-block;margin:0 2px}
+
+.footer{border-top:3px double var(--goldline);margin-top:6px;padding-top:3px;display:flex;gap:10px;align-items:baseline}
+.footer p{font-size:7.3px;color:var(--faded)}
+
+/* ===== official Arcs typography: single-weight faces ===== */
+*{font-weight:400 !important}
+b,strong{-webkit-text-stroke:.3px currentColor}
+.rstep h4,.tstep h4,.opt h4,.die h5,.suit .nm,
+.sect .n,.rstep h4 .n,.tstep .n,.amb .chip{font-family:'EBG'}
+.rstep h4,.tstep h4,.opt h4,.die h5,.suit .nm{-webkit-text-stroke:0}
+.opt h4 .tag{font-family:'AS';-webkit-text-stroke:.2px currentColor}
+.hdr .sub{letter-spacing:2px}
+/* inline reference chip, replaces the circled-number glyphs */
+.ref{display:inline-flex;align-items:center;justify-content:center;width:9px;height:9px;border-radius:50%;
+  background:var(--ink);color:var(--paper);font-family:'EBG';font-size:6.4px;font-style:normal;
+  letter-spacing:0;vertical-align:-.9px;-webkit-text-stroke:0}
+.sect span.long{font-size:9.4px;letter-spacing:.6px}
+.sect span.xlong{font-size:8.6px;letter-spacing:.4px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+<defs><path id="pipd" d="M12 0 C13.6 7.4 16.6 10.4 24 12 C16.6 13.6 13.6 16.6 12 24 C10.4 16.6 7.4 13.6 0 12 C7.4 10.4 10.4 7.4 12 0 Z"/></defs>
+</svg>
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page pg1">
+  <div class="hdr">
+    <span class="title">Arcs</span>
+    <span class="sub">Player Reference · The Round &amp; Your Turn</span>
+    <span class="right">battle &amp; scoring on back</span>
+  </div>
+
+  <div class="sect"><span>The Round — everyone takes one turn</span></div>
+  <div class="round">
+    <div class="rstep"><h4><span class="n">1</span>Initiative leads</h4>
+      <p>The player with the <b>initiative marker</b> plays the <b>lead card</b> — or <b>passes initiative</b> clockwise to the next player with cards, ending the round.</p></div>
+    <div class="rstep"><h4><span class="n">2</span>Others follow</h4>
+      <p>Each other player, in clockwise order, takes a turn: <b>Surpass</b>, <b>Copy</b>, or <b>Pivot</b>. No cards in hand? Skip.</p></div>
+    <div class="rstep"><h4><span class="n">3</span>Check initiative</h4>
+      <p>If someone <b>seized</b>, they keep it. Otherwise it goes to the <b>highest Surpass</b>. Nobody Surpassed? It stays put.</p></div>
+    <div class="rstep"><h4><span class="n">4</span>Discard &amp; repeat</h4>
+      <p>Discard all played cards face down. Hands empty (or everyone with cards passed)? The <b>chapter ends — score ambitions</b> <i>(see back)</i>.</p></div>
+  </div>
+
+  <div class="sect"><span>Your Turn — Four Steps, In Order</span></div>
+  <div class="round">
+    <div class="rstep"><h4><span class="n">1</span>Play one card</h4>
+      <p>As <b>lead</b> if you hold initiative — otherwise <b>Surpass</b>, <b>Copy</b>, or <b>Pivot</b> <i>(<span class="ref">1</span> below)</i>.</p></div>
+    <div class="rstep"><h4><span class="n">2</span>Declare / Seize</h4>
+      <p><i>Optional.</i> The initiative player may <b>declare an ambition</b>; others may <b>seize the initiative</b> <i>(<span class="ref">2</span> below)</i>.</p></div>
+    <div class="rstep"><h4><span class="n">3</span>Prelude</h4>
+      <p>Spend any number of <b>resources</b> and &ldquo;<b>Prelude:</b>&rdquo; card actions <i>(<span class="ref">3</span> below)</i>.</p></div>
+    <div class="rstep"><h4><span class="n">4</span>Take actions</h4>
+      <p><b>One action per pip</b>, matching your card&rsquo;s suit <i>(<span class="ref">4</span> below)</i>. Your first pip ends the Prelude.</p></div>
+  </div>
+
+  <div class="cols" style="flex:none">
+    <div class="col">
+      <div class="sect left"><span class="n">1</span><span class="long">Play Your Card — Four Ways</span></div>
+      <div class="opt"><img src="img/card2.png">
+        <div><h4>Lead <span class="tag" style="background:#8a6d2f">initiative player</span> <span class="pips">— all pips
+          <svg class="pip" viewBox="0 0 24 24"><use href="#pipd" fill="#c05a28"/></svg><svg class="pip" viewBox="0 0 24 24"><use href="#pipd" fill="#c05a28"/></svg><svg class="pip" viewBox="0 0 24 24"><use href="#pipd" fill="#c05a28"/></svg><svg class="pip" viewBox="0 0 24 24"><use href="#pipd" fill="#c05a28"/></svg></span></h4>
+        <p>Play any card face up as the <b>lead card</b>. Take up to <b>one action per pip</b> in its corner. Its suit sets the round&rsquo;s <b>lead suit</b>.</p></div></div>
+      <div class="opt"><img src="img/card4.png">
+        <div><h4>Surpass <span class="pips">— all pips</span></h4>
+        <p>Face up, <b>same suit as the lead</b> card, <b>higher number</b> than the lead card <i>(not than every card!)</i>. Take up to one action per pip on <b>your</b> card.</p></div></div>
+      <div class="opt"><img src="img/cardback.png">
+        <div><h4>Copy <span class="pips">— 1 action</span></h4>
+        <p><b>Any card, face down.</b> Take <b>one action of the lead card</b>. Can&rsquo;t Surpass or Pivot? You can always Copy.</p></div></div>
+      <div class="opt"><img src="img/card7.png">
+        <div><h4>Pivot <span class="pips">— 1 action</span></h4>
+        <p>Face up, any card <b>not of the lead suit</b>. Take <b>one action on your card</b> <i>(not the lead card&rsquo;s!)</i>. Doesn&rsquo;t change the lead suit.</p></div></div>
+    </div>
+    <div class="col">
+      <div class="sect left"><span class="n">2</span><span>Declare or Seize</span></div>
+      <div class="box">
+        <p><b>Declare</b> — only the <b>initiative player</b>, when playing the lead card, before Prelude &amp; actions: cover the card&rsquo;s number with the <b>zero marker</b> (it becomes <b>0</b>, pips unchanged — easy to Surpass, so you&rsquo;ll likely lose initiative) and put the <b>highest available ambition marker</b> in the matching box. The card&rsquo;s <b>number</b> picks the ambition:</p>
+        <p style="margin-top:2.5px;text-align:center;font-size:8.4px">
+          <b>2</b> Tycoon&ensp;·&ensp;<b>3</b> Tyrant&ensp;·&ensp;<b>4</b> Warlord&ensp;·&ensp;<b>5</b> Keeper&ensp;·&ensp;<b>6</b> Empath&ensp;·&ensp;<b>7</b> any&ensp;·&ensp;<b>1</b> none</p>
+        <p style="margin-top:2.5px">You may re-declare an already-declared ambition (stack another marker). No markers left? No declaring. <i>(&ldquo;1&rdquo; and &ldquo;7&rdquo; cards are used in 4-player games only.)</i></p>
+        <p style="margin-top:3px;border-top:1px dotted #cbb87f;padding-top:3px"><b>Seize</b> — any <b>other</b> player, when playing their card, if no one has seized yet this round: play an <b>extra card face down</b> (no actions from it), or Surpass with a <b>7</b> <i>(4-player)</i>. Lay the marker on its side. Whoever seized keeps initiative at round&rsquo;s end.</p>
+      </div>
+      <div class="sect left"><span>Initiative</span></div>
+      <div class="box" style="display:grid;grid-template-columns:26px 1fr;gap:7px;align-items:center">
+        <img src="img/init.png" style="width:26px">
+        <div>
+          <p>Whoever holds the marker leads the next round — going <b>first is power</b>, but leading spends your good cards.</p>
+          <p style="margin-top:2px"><b>Passing:</b> with initiative and no card you want to play, pass it clockwise (to the next player holding cards) — the round ends immediately.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cols" style="flex:none">
+    <div class="col">
+      <div class="sect left"><span class="n">3</span><span class="long">Prelude — What Resources Do</span></div>
+      <div class="box">
+        <div class="rrow"><img src="img/r_mat.png"><p><b>Material</b> — take a <b>Build</b> or <b>Repair</b> action.</p></div>
+        <div class="rrow"><img src="img/r_fuel.png"><p><b>Fuel</b> — take a <b>Move</b> action.</p></div>
+        <div class="rrow"><img src="img/r_wpn.png"><p><b>Weapon</b> — this turn, your card&rsquo;s pips may also be spent on <b>Battle</b> actions.</p></div>
+        <div class="rrow"><img src="img/r_rel.png"><p><b>Relic</b> — take a <b>Secure</b> action.</p></div>
+        <div class="rrow"><img src="img/r_psi.png"><p><b>Psionic</b> — take any action listed on the <b>lead card</b>.</p></div>
+        <p class="small" style="margin-top:2px">Spent resources return to the supply only <b>after</b> your Prelude ends, and cards secured this Prelude can&rsquo;t be used yet.</p>
+        <p style="margin-top:3px;border-top:1px dotted #cbb87f;padding-top:3px;font-size:8.2px"><b style="color:#a3372c">Outrage:</b> <b>Outraged resources cannot be spent for their Prelude action</b> — they still count for ambitions and can still be taxed. You also can&rsquo;t spend resources if you pass initiative or have no cards in hand.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="sect left"><span class="n">4</span><span>Take Actions · Glossary</span></div>
+      <div class="box">
+        <div class="suit"><svg class="pip lg" viewBox="0 0 24 24"><use href="#pipd" fill="#8b8574"/></svg><span class="nm" style="color:#6d6754">Administration</span><span class="acts">Tax · Repair · Influence</span></div>
+        <div class="suit"><svg class="pip lg" viewBox="0 0 24 24"><use href="#pipd" fill="#bf3a2f"/></svg><span class="nm" style="color:#bf3a2f">Aggression</span><span class="acts">Battle · Move · Secure</span></div>
+        <div class="suit"><svg class="pip lg" viewBox="0 0 24 24"><use href="#pipd" fill="#c05a28"/></svg><span class="nm" style="color:#c05a28">Construction</span><span class="acts">Build · Repair</span></div>
+        <div class="suit" style="margin-bottom:3px"><svg class="pip lg" viewBox="0 0 24 24"><use href="#pipd" fill="#2e7f92"/></svg><span class="nm" style="color:#2e7f92">Mobilization</span><span class="acts">Move · Influence</span></div>
+        <div class="gloss">
+          <p><b>Tax</b> — pick a Loyal city, or a Rival city <i>you control</i>: gain 1 resource of its planet type. Rival city: also capture 1 of their agents. Once per city per turn.</p>
+          <p><b>Build</b> — place a city/starport in an empty slot on a planet with Loyal pieces, <i>or</i> 1 ship at a Loyal starport (1 ship per starport per turn). Built where a Rival controls? It arrives damaged.</p>
+          <p><b>Move</b> — any number of Loyal ships, one system » one adjacent system. From a Loyal starport: <b>Catapult</b> — keep moving until entering any planet or a gate a Rival controls.</p>
+          <p><b>Repair</b> — flip or stand up 1 damaged Loyal piece, anywhere on the map.</p>
+          <p><b>Influence</b> — place 1 agent on any card in the Court.</p>
+          <p><b>Secure</b> — take a Court card where you have <i>more</i> agents than each Rival. Your agents return; Rival agents become <b>Captives</b>. Refill the Court.</p>
+          <p><b>Battle</b> — fight in one system <i>(full workflow on back)</i>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page pg2">
+  <div class="hdr">
+    <span class="title">Arcs</span>
+    <span class="sub">Player Reference · Battle &amp; Winning</span>
+    <span class="right">turn structure &amp; card play on front</span>
+  </div>
+
+  <div class="cols" style="margin-top:0;flex:none">
+    <!-- LEFT: battle -->
+    <div class="col">
+      <div class="sect left"><span>Battle — an Aggression action</span></div>
+      <div class="goldbox tsteps">
+        <div class="tstep"><div class="n">1</div><div>
+          <h4>Choose battle system</h4>
+          <p>Any one system with your <b>Loyal ships</b> — they are your <b>attackers</b>.</p></div></div>
+        <div class="tstep"><div class="n">2</div><div>
+          <h4>Choose defender</h4>
+          <p>One <b>Rival</b> with pieces there. All their pieces in the system defend.</p></div></div>
+        <div class="tstep"><div class="n">3</div><div>
+          <h4>Collect dice — up to 1 per attacking ship</h4>
+          <p>Mix freely; max 6 of a type; you may take fewer.
+             <b style="color:var(--assault)">Assault</b> hits fast but singes you.
+             <b style="color:#1e8fb4">Skirmish</b> is slow and safe.
+             <b style="color:#c2691f">Raid</b> steals and cracks buildings — riskiest.</p>
+          <p class="small" style="margin-top:1.5px"><b>Raid limit:</b> raid dice only if the defender has buildings here — or no Loyal buildings anywhere on the map.</p></div></div>
+        <div class="tstep"><div class="n">4</div><div>
+          <h4>Roll — resolve every face, in this order</h4></div></div>
+        <div class="box" style="background:rgba(255,255,255,.5);margin-left:22px">
+          <div class="res"><img src="img/i_self.png"><p><b>1 · Hit your own ships</b> — once per flame rolled.</p></div>
+          <div class="res"><img src="img/i_int.png"><p><b>2 · Intercept</b> — if <i>any</i> rings rolled: hit your ships once per <b>fresh defending ship</b>. Happens at most once per battle.</p></div>
+          <div class="res"><img src="img/i_hit.png"><p><b>3 · Hit defending ships</b> — once per burst. No defending ships left? Hit their <b>buildings</b> instead.</p></div>
+          <div class="res"><img src="img/i_bld.png"><p><b>4 · Hit defending buildings</b> — once per building-burst.</p></div>
+          <div class="res"><img src="img/i_key.png"><p><b>5 · Raid</b> — only if you still have attacking ships: spend keys to steal the defender&rsquo;s resources &amp; Guild cards, paying each item&rsquo;s <b>raid cost</b> in keys.</p></div>
+        </div>
+        <p class="small" style="margin-left:22px">The <b>attacker</b> makes every choice — the defender just watches.</p>
+      </div>
+
+      <div class="sect left"><span class="long">Resolving a Battle &amp; Triggering Outrage</span></div>
+      <div class="box">
+        <p><img src="img/ship_b.png" style="height:13px;vertical-align:-2px"> <b>fresh</b> »
+           <img src="img/ship_tipped.png" style="height:11px;vertical-align:-1px"> <b>damaged</b> » <b>destroyed</b>.
+           A hit damages a fresh piece (tip ship / flip building) and <b>destroys</b> a damaged one.</p>
+        <p style="margin-top:2px"><b>Trophies:</b> destroyed pieces land in a <b>Trophies box</b> — the attacker takes the defender&rsquo;s destroyed pieces, the defender takes the attacker&rsquo;s. Trophies feed <b>Warlord</b>.</p>
+        <p style="margin-top:3px"><b>Destroying a city</b> (even outside battle):</p>
+        <p style="margin-top:1px"><b>1 · Provoke Outrage</b> — discard all your resources &amp; Guild cards of that city&rsquo;s planet type; an agent covers that Outrage slot. That resource type loses its Prelude action for the rest of the game.</p>
+        <p style="margin-top:1px"><b>2 · Ransack the Court</b> — immediately Secure any Court card holding the defender&rsquo;s agents (any number). Rival agents there become <b>Trophies</b>, not Captives.</p>
+      </div>
+
+      <div class="sect left"><span>Pieces &amp; Terms</span></div>
+      <div class="box">
+        <div class="symgrid">
+        <div class="sym"><img src="img/ship_b.png"><p><b>Ship</b> — moves, battles, and controls systems.</p></div>
+        <div class="sym"><img src="img/city_fresh.png"><p><b>City</b> — tax it for resources; opens resource slots &amp; scoring bonuses.</p></div>
+        <div class="sym"><img src="img/port_fresh.png"><p><b>Starport</b> — builds ships; launches Catapult moves.</p></div>
+        <div class="sym"><img src="img/agent_b.png"><p><b>Agent</b> — influence in the Court; can be captured.</p></div>
+        <div class="sym"><img src="img/init.png"><p><b>Initiative marker</b> — its holder leads the round; laid on its side when seized.</p></div>
+        <div class="sym"><img src="img/am53.png"><p><b>Ambition marker</b> — marks a declared ambition and the Power it awards.</p></div>
+        </div>
+        <div style="border-top:1px dotted #cbb87f;margin:4px 0 3px"></div>
+        <div class="gloss">
+        <p><b>Loyal</b> — a piece of your color. <b>Rival</b> — another player, or a piece of their color.</p>
+        <p><b>Control</b> — more <i>fresh</i> ships in the system than each Rival. On a tie, no one controls.</p>
+        <p><b>Fresh</b> — upright ship, or building on its bright side. <b>Damaged</b> — tipped ship, or building on its dark side. Hitting a damaged piece <b>destroys</b> it.</p>
+        <p><b>Building</b> — a city or a starport.</p>
+        <p><b>System</b> — a planet or a gate. Systems sharing a thin border are <b>adjacent</b>.</p>
+        <p><b>Gate</b> — the numbered hub system of each 3-planet cluster. It is adjacent to its cluster&rsquo;s planets <i>and</i> to the neighboring clusters&rsquo; gates, so travel between clusters flows through gates. Gates have no building slots.</p>
+        <p><b>Capture</b> — take a Rival piece to your Captives box <i>(feeds Tyrant)</i>.</p>
+        <p><b>Trophy</b> — a destroyed piece: the attacker takes the defender&rsquo;s destroyed pieces and vice versa <i>(feeds Warlord)</i>.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: dice + ambitions -->
+    <div class="col">
+      <div class="sect left"><span class="long">The Battle Dice — all six faces</span></div>
+      <div class="box">
+        <div class="dice3">
+          <div class="die"><h5 style="color:var(--assault)">Assault</h5>
+            <div class="faces">
+              <img src="img/da4.png"><img src="img/da3.png"><img src="img/da1.png">
+              <img src="img/da2.png"><img src="img/da2.png"><img src="img/da6.png">
+            </div>
+            <p><b>Heavy damage</b>, self-hits, one intercept face</p></div>
+          <div class="die"><h5 style="color:#1e8fb4">Skirmish</h5>
+            <div class="faces">
+              <img src="img/ds13.png"><img src="img/ds13.png"><img src="img/ds13.png">
+              <img src="img/ds45.png"><img src="img/ds45.png"><img src="img/ds45.png">
+            </div>
+            <p><b>Half hit, half nothing</b> — never hurts you</p></div>
+          <div class="die"><h5 style="color:#c2691f">Raid</h5>
+            <div class="faces">
+              <img src="img/dr1.png"><img src="img/dr2.png"><img src="img/dr5.png">
+              <img src="img/dr34.png"><img src="img/dr34.png"><img src="img/dr6.png">
+            </div>
+            <p><b>Keys &amp; building hits</b> — but self-hits and intercepts</p></div>
+        </div>
+        <div class="symgrid" style="margin-top:5px;border-top:1px dotted #cbb87f;padding-top:4px">
+          <div class="sym"><img src="img/i_hit.png"><p><b>Hit</b> a defending ship (then buildings)</p></div>
+          <div class="sym"><img src="img/i_self.png"><p><b>Self-hit</b> — hit your own attacking ship</p></div>
+          <div class="sym"><img src="img/i_bld.png"><p><b>Hit building</b> — a defending building</p></div>
+          <div class="sym"><img src="img/i_int.png"><p><b>Intercept</b> — defender strikes back once</p></div>
+          <div class="sym"><img src="img/i_key.png"><p><b>Key</b> — spend to steal (raid cost)</p></div>
+          <div class="sym"><svg class="pip" style="width:12px;height:12px" viewBox="0 0 24 24"><use href="#pipd" fill="#28211a"/></svg><p><b>Pip</b> — one action from a played card</p></div>
+        </div>
+      </div>
+
+      <div class="sect left"><span>The Five Ambitions</span></div>
+      <div class="dark">
+        <div class="amb"><div class="chip">2</div><img class="ic" src="img/a_tycoon.png"><span class="nm">Tycoon</span>
+          <p>Most <b>Material <img class="tok" src="img/r_mat.png"> + Fuel <img class="tok" src="img/r_fuel.png"></b> icons on your resources &amp; Guild cards</p></div>
+        <div class="amb"><div class="chip">3</div><img class="ic" src="img/a_tyrant.png"><span class="nm">Tyrant</span>
+          <p>Most <b>Captives</b> — from taxing Rival cities &amp; securing cards with Rival agents <i>(returned after scoring)</i></p></div>
+        <div class="amb"><div class="chip">4</div><img class="ic" src="img/a_warlord.png"><span class="nm">Warlord</span>
+          <p>Most <b>Trophies</b> — Rival pieces you destroyed <i>(returned after scoring)</i></p></div>
+        <div class="amb"><div class="chip">5</div><img class="ic" src="img/a_keeper.png"><span class="nm">Keeper</span>
+          <p>Most <b>Relic <img class="tok" src="img/r_rel.png"></b> icons on your resources &amp; Guild cards</p></div>
+        <div class="amb"><div class="chip">6</div><img class="ic" src="img/a_empath.png"><span class="nm">Empath</span>
+          <p>Most <b>Psionic <img class="tok" src="img/r_psi.png"></b> icons on your resources &amp; Guild cards</p></div>
+        <p class="small" style="margin-top:3px;color:#b8a878">Weapon resources &amp; Weapon Guild cards feed no ambition — they&rsquo;re for fighting.</p>
+      </div>
+
+      <div class="sect left"><span class="long">Chapter End — Scoring &amp; Victory</span></div>
+      <div class="goldbox">
+        <div style="display:grid;grid-template-columns:1fr 108px;gap:8px;align-items:center">
+          <div>
+            <p><b>Score each declared ambition:</b> 1st place gains the <b>large number on every marker</b> in its box; 2nd place gains the small. You must have <b>at least one</b> of what it counts.</p>
+            <p style="margin-top:2px"><b>Ties:</b> tied for 1st » each tied player takes <b>2nd place</b> Power, 1st goes unawarded, and <b>everyone else scores nothing</b> — 2nd is used up. Tied for 2nd » those tied score nothing.</p>
+            <p style="margin-top:2px"><b>City bonus:</b> each untied 1st gains <b>+2</b> if your &ldquo;+2&rdquo; city slot is open <i>(+5 if &ldquo;+3&rdquo; is open too)</i>.</p>
+          </div>
+          <div>
+            <div class="mrow"><img src="img/am53.png"><img src="img/am32.png"><img src="img/am20.png"></div>
+            <div class="mrow" style="margin:1px 0"><span class="arr"></span><span style="font-size:6.8px;color:var(--faded)">each chapter, lowest unflipped marker flips</span></div>
+            <div class="mrow"><img src="img/am94.png"><img src="img/am63.png"><img src="img/am42.png"></div>
+          </div>
+        </div>
+        <p style="margin-top:3px;border-top:1px dotted #cbb87f;padding-top:3px">
+          Then return markers (and scored Trophies/Captives), and everyone draws a new hand of <b>6 cards</b>.
+          <b>Game ends</b> at chapter end if anyone has <b>27 Power</b> (4p) / <b>30</b> (3p) / <b>33</b> (2p) — or after <b>Chapter 5</b>. Most Power wins; ties go to the tied player earliest in turn order.</p>
+      </div>
+
+      <div class="sect left"><span>The Court &amp; Guild Cards</span></div>
+      <div class="box" style="display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center">
+        <img src="img/agent_b.png" style="width:22px">
+        <p><b>Influence</b> puts agents on Court cards; <b>Secure</b> takes one where you have the most. <b>Guild cards</b> join your play area — their <b>suit icon</b> counts toward ambitions exactly like a resource, and their <b>raid cost</b> is the keys needed to steal them in battle. <b>Vox cards</b> resolve immediately when secured.</p>
+      </div>
+
+      <div class="dark">
+        <p style="font-family:'EBG';font-weight:700;letter-spacing:2px;font-variant:small-caps;font-size:11px;color:#e6cf8f;margin-bottom:2px">Leaders &amp; Lore</p>
+        <p style="color:#d9cba1;font-size:8px;line-height:1.28">Your <b>Leader</b> grants unique powers all game. <b>Lore</b> cards grant persistent powers — no suit icon or raid cost, so they never add to ambitions and can&rsquo;t be stolen. <b>Card text beats the rulebook</b>; only &ldquo;cannot&rdquo; is absolute. New actions like &ldquo;Summon <i>(Build)</i>&rdquo; may replace the named action whenever you could take it.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p><b>Arcs</b> by Cole Wehrle · art by Kyle Ferrin · © Leder Games — unofficial player reference, not a rules substitute.</p>
+    <p style="margin-left:auto">Rules questions? Rulebook page refs: turns 8–11 · actions 12–16 · resources 17 · scoring 18–19 · Leaders &amp; Lore 21.</p>
+  </div>
+</div>
+
+</body>
+</html>
