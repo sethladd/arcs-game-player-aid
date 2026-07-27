@@ -1,10 +1,10 @@
-# Improved Arcs Player Aid
+# Alternative Arcs Player Aid
 
 A two-page, double-sided player reference for **[Arcs](https://ledergames.com/arcs)** (Leder Games),
 covering the base game plus Leaders & Lore. Print it on one sheet of US Letter, in color, and put it
 on the table.
 
-**→ [`Arcs_Player_Aid_Improved.pdf`](Arcs_Player_Aid_Improved.pdf)** — the thing you print.
+**→ [`Arcs_Player_Aid_Alternative.pdf`](Arcs_Player_Aid_Alternative.pdf)** — the thing you print.
 
 It is a *reference*, not a tutorial. It assumes the game is already set up and skips setup entirely.
 
@@ -34,13 +34,13 @@ scores nothing*, because second place is used up (Base Rulebook p. 18).
 ## Repository contents
 
 ```
-Arcs_Player_Aid_Improved.pdf   the deliverable — print this
-arcs-aid-source.zip            buildable source (unzip to work on it)
-source/                        loose copy of the HTML + README, for reading and diffing
-icon and punchboard/           official icon & punchboard art from the Arcs dev kit
-fonts/                         the two Arcs typefaces — untracked, supply your own (see below)
-Arcs_Base_Rulebook.pdf         reference
-Arcs_Aid_Booklet.pdf           reference — the official aid this one improves on
+Arcs_Player_Aid_Alternative.pdf      the deliverable — print this
+arcs-aid-source.zip                  buildable source (unzip to work on it)
+source/                              loose copy of the HTML + README, for reading and diffing
+icon and punchboard/                 official icon & punchboard art from the Arcs dev kit
+fonts/                               the two Arcs typefaces — untracked, supply your own (see below)
+Arcs_Base_Rulebook.pdf               reference
+Arcs_Aid_Booklet.pdf                 reference — the official aid this one is an alternative to
 Arcs_Campaign_Rulebook_for_web.pdf
 ```
 
@@ -85,7 +85,7 @@ through headless Chromium — `arcs_player_aid.html` *is* the source.
 unzip arcs-aid-source.zip
 cd arcs-aid-source
 cp /path/to/your/*.woff2 fonts/    # see "Getting the fonts" above
-./build.sh                         # writes Arcs_Player_Aid_Improved.pdf
+./build.sh                         # writes Arcs_Player_Aid_Alternative.pdf
 ```
 
 Or open the HTML in Chrome and print to PDF with **Margins: None**, **Background graphics: on**,

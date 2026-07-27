@@ -1,6 +1,6 @@
 # Arcs Player Aid — source
 
-Source for `Arcs_Player_Aid_Improved.pdf`, a 2-page (double-sided US Letter, color)
+Source for `Arcs_Player_Aid_Alternative.pdf`, a 2-page (double-sided US Letter, color)
 player reference for **Arcs** with Leaders & Lore.
 
 The PDF is generated from a single hand-written HTML file printed through headless
@@ -22,7 +22,7 @@ font-specimen.html     type-test page used to pick sizes & emphasis
 ## Rebuild
 
 ```bash
-./build.sh                 # writes Arcs_Player_Aid_Improved.pdf
+./build.sh                 # writes Arcs_Player_Aid_Alternative.pdf
 ./build.sh somewhere.pdf   # or name your own output
 ```
 
@@ -76,7 +76,7 @@ To audit after editing, check the built PDF's embedded fonts — anything beyond
 
 ```python
 import fitz
-doc = fitz.open("Arcs_Player_Aid_Improved.pdf")
+doc = fitz.open("Arcs_Player_Aid_Alternative.pdf")
 for i, page in enumerate(doc):
     print(i + 1, sorted({f[3] for f in page.get_fonts(full=True)}))
 ```
