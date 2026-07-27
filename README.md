@@ -10,14 +10,9 @@ It is a *reference*, not a tutorial. It assumes the game is already set up and s
 
 ## Why this exists
 
-The aid sheet in the box is a good document, but it has two problems in play:
+A useful, complete player aid that includes a very clear turn structure inclusive of Prelude.
 
-1. **It's verbose.** It reads like a condensed rulebook rather than something you scan mid-turn.
-2. **It never gives you a complete turn.** Most notably it omits the **Prelude** — the window where
-   you spend resources and trigger card abilities — so a new player following the sheet step by step
-   will silently skip a whole phase of their turn.
-
-This aid fixes both. The turn is presented as four numbered steps, in order, and those same numbers
+The turn is presented as four numbered steps, in order, and those same numbers
 label the sections that expand them — so you can follow the sequence top to bottom without hunting.
 
 ## What's on each page
