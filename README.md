@@ -153,3 +153,6 @@ originally released by Leder Games.
 This is an unofficial fan-made player aid. It is not affiliated with or endorsed by Leder Games or
 Buried Giant Studios, and it is not a substitute for the rulebook — where the two disagree, the
 rulebook wins.
+
+This player aid was co-created by Seth Ladd and Claude (Anthropic), working together on the rules
+distillation, layout, and build tooling.
