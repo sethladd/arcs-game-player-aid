@@ -126,16 +126,30 @@ ambition pictograms and the action-card corners were cropped at high resolution 
 
 The licensed fonts are git-ignored and are not in the commit history, so they won't leak.
 
-Still tracked, however, are Leder Games' rulebook PDFs and the dev-kit icon art. Those are lower risk
-— Leder distributes both freely, and the dev kit exists precisely so people can make things like this
-— but they are still Leder's copyrighted material, not yours to republish. If you push this
-somewhere public, consider ignoring `icon and punchboard/` and the three rulebook PDFs too, and
-pointing contributors at the dev kit to fetch their own copies.
+Still tracked, however, are the rulebook PDFs and the dev-kit icon art, both originally released by
+Leder Games. Those are lower risk — they were distributed freely, and the dev kit existed precisely so
+people could make things like this — but they are still Arcs' copyrighted material (now held by
+Buried Giant Studios, see [License](#license)), not yours to republish. If you push this somewhere
+public, consider ignoring `icon and punchboard/` and the three rulebook PDFs too, and pointing
+contributors at the dev kit to fetch their own copies.
+
+## License
+
+The original text, layout, and design in this repository are licensed under
+[CC BY-NC-SA 4.0](LICENSE). That license does not extend to Arcs' copyrighted
+material (icons, art, rules text, the Arcs name/logo), which stays with its
+rights holder — see [`LICENSE`](LICENSE) for the exact split and the ownership
+history behind it.
 
 ## Credits
 
-*Arcs* is designed by **Cole Wehrle**, illustrated by **Kyle Ferrin**, and published by
-**[Leder Games](https://ledergames.com)**. All game art, icons, and text are theirs.
+*Arcs* is designed by **Cole Wehrle** and illustrated by **Kyle Ferrin**. It was originally published
+by Leder Games; as of early 2026, ownership of Arcs has moved to
+**[Buried Giant Studios](https://buriedgiant.com)**, the studio Wehrle and Ferrin founded after
+leaving Leder (Leder retained Root). All game art, icons, and text are the property of Arcs' current
+rights holder. The rulebook PDFs and dev-kit icon art in this repository predate that move and were
+originally released by Leder Games.
 
-This is an unofficial fan-made player aid. It is not affiliated with or endorsed by Leder Games, and
-it is not a substitute for the rulebook — where the two disagree, the rulebook wins.
+This is an unofficial fan-made player aid. It is not affiliated with or endorsed by Leder Games or
+Buried Giant Studios, and it is not a substitute for the rulebook — where the two disagree, the
+rulebook wins.
